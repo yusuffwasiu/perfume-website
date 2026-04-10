@@ -1,0 +1,147 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: #FAF8F4;
+  color: #1C1A17;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 48px;
+  border-bottom: 0.5px solid rgba(180,155,100,0.2);
+}
+
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  letter-spacing: 0.06em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #7A7060;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #C9A84C;
+}
+
+/* Hero section */
+.hero {
+  text-align: center;
+  padding: 100px 24px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hero-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 64px;
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: #C9A84C;
+}
+
+.hero-sub {
+  color: #7A7060;
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+.hero button {
+  background: #1C1A17;
+  color: #F5EED8;
+  border: none;
+  padding: 14px 32px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.hero button:hover {
+  background: #C9A84C;
+  color: #1C1A17;
+  transform: translateY(-1px);
+}
+
+/* Features section */
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 0.5px solid rgba(180,155,100,0.2);
+  border-bottom: 0.5px solid rgba(180,155,100,0.2);
+}
+
+.feature {
+  padding: 48px 40px;
+  border-right: 0.5px solid rgba(180,155,100,0.2);
+  text-align: center;
+}
+
+.feature:last-child {
+  border-right: none;
+}
+
+.feature span {
+  font-size: 28px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.feature h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.feature p {
+  font-size: 13px;
+  color: #7A7060;
+  line-height: 1.7;
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .hero h1 { font-size: 40px; }
+  .features { grid-template-columns: 1fr; }
+  .feature {
+    border-right: none;
+    border-bottom: 0.5px solid rgba(180,155,100,0.2);
+  }
+}
