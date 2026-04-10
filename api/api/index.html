@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Maison de Parfum</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">✦ Maison de Parfum</div>
+    <div class="nav-links">
+      <a href="#">Shop</a>
+      <a href="#">Collections</a>
+      <a href="#">About</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <p class="hero-label">New Collection 2025</p>
+    <h1>Find Your<br/><em>Signature Scent</em></h1>
+    <p class="hero-sub">Let our AI advisor guide you to the fragrance that speaks your soul.</p>
+    <button onclick="openChat()">Start Your Journey →</button>
+  </header>
+
+  <section class="features">
+    <div class="feature">
+      <span>🌹</span>
+      <h3>Curated Scents</h3>
+      <p>Handpicked from the finest perfume houses around the world.</p>
+    </div>
+    <div class="feature">
+      <span>✦</span>
+      <h3>AI Advisor</h3>
+      <p>Tell us your vibe and we will find your perfect match instantly.</p>
+    </div>
+    <div class="feature">
+      <span>🎁</span>
+      <h3>Gift Ready</h3>
+      <p>Every order ships in a luxury box, perfect for gifting.</p>
+    </div>
+  </section>
+
+  <script>
+    window.PERFUME_API_URL = '/api/chat';
+    function openChat() {
+      document.getElementById('pf-launcher').click();
+    }
+  </script>
+  <script src="widget.js"></script>
+
+</body>
+</html>
