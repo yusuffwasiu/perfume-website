@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cart — Maison de Parfum</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="logo">✦ Maison de Parfum</a>
+    <div class="nav-links">
+      <a href="shop.html">Shop</a>
+      <a href="advisor.html">AI Advisor</a>
+    </div>
+    <div class="nav-actions">
+      <a href="cart.html" class="cart-icon">🛍 <span class="cart-count" id="cartCount">0</span></a>
+    </div>
+  </nav>
+
+  <div class="cart-page">
+    <h1 class="cart-title">Your Cart</h1>
+    <div class="cart-layout">
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-summary">
+        <h3>Order Summary</h3>
+        <div class="summary-row"><span>Subtotal</span><span id="subtotal">$0</span></div>
+        <div class="summary-row"><span>Shipping</span><span>Free</span></div>
+        <div class="summary-row total"><span>Total</span><span id="total">$0</span></div>
+        <button class="btn-primary full-width" onclick="location.href='checkout.html'">Proceed to Checkout</button>
+        <a href="shop.html" class="btn-outline full-width" style="text-align:center;display:block;margin-top:10px">Continue Shopping</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="logo">✦ Maison de Parfum</div>
+    <p>© 2025 Maison de Parfum. All rights reserved.</p>
+  </footer>
+
+  <script src="shop.js"></script>
+  <script>
+    function renderCart() {
+      const cart = getCart();
+      const container = document.getElementById('cartItems');
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="empty-cart">
+            <p>Your cart is empty</p>
+            <a href="shop.html" class="btn-primary">Start Shopping</a>
+          </div>`;
+        return;
+      }
+      container.innerHTML = cart.map(item => {
+        const p = PRODUCTS.find(x => x.id === item.id);
+        return `
+          <div class="cart-item">
+            <div class="ci-emoji">${p.emoji}</div>
+            <div class="ci-info">
+              <p class="ci-family">${p.family}</p>
+              <h4 class="ci-name">${p.name}</h4>
+              <p class="ci-price">$${p.price}</p>
+            </div>
+            <div class="ci-qty">
+              <button onclick="updateQty(${p.id}, ${item.qty - 1})">−</button>
+              <span>${item.qty}</span>
+              <button onclick="updateQty(${p.id}, ${item.qty + 1})">+</button>
+            </div>
+            <div class="ci-total">$${p.price * item.qty}</div>
+            <button class="ci-remove" onclick="removeFromCart(${p.id}); renderCart()">✕</button>
+          </div>`;
+      }).join('');
+      const total = getCartTotal();
+      document.getElementById('subtotal').textContent = '$' + total;
+      document.getElementById('total').textContent = '$' + total;
+    }
+
+    function updateQty(id, newQty) {
+      if (newQty < 1) { removeFromCart(id); }
+      else {
+        const cart = getCart();
+        const item = cart.find(i => i.id === id);
+        if (item) item.qty = newQty;
+        saveCart(cart);
+      }
+      renderCart();
+    }
+
+    renderCart();
+    updateCartCount();
+  </script>
+</body>
+</html>

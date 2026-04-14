@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Advisor — Maison de Parfum</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="logo">✦ Maison de Parfum</a>
+    <div class="nav-links">
+      <a href="shop.html">Shop</a>
+      <a href="advisor.html" class="active">AI Advisor</a>
+    </div>
+    <div class="nav-actions">
+      <a href="cart.html" class="cart-icon">🛍 <span class="cart-count" id="cartCount">0</span></a>
+    </div>
+  </nav>
+
+  <div class="advisor-page">
+    <div class="advisor-intro">
+      <p class="hero-label">Powered by AI</p>
+      <h1>Your Personal<br/><em>Scent Advisor</em></h1>
+      <p>Tell us about yourself — your personality, lifestyle, favourite smells — and we'll find your perfect fragrance from our collection.</p>
+    </div>
+
+    <div class="advisor-chat" id="advisorChat">
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-chips" id="chatChips">
+        <div class="pf-chip" onclick="chipSend(this)">Fresh & citrusy</div>
+        <div class="pf-chip" onclick="chipSend(this)">Warm & sensual</div>
+        <div class="pf-chip" onclick="chipSend(this)">Woody & earthy</div>
+        <div class="pf-chip" onclick="chipSend(this)">Floral & romantic</div>
+        <div class="pf-chip" onclick="chipSend(this)">I need a gift</div>
+      </div>
+      <div class="chat-input-row">
+        <textarea id="advisorInput" placeholder="Describe your ideal scent…" rows="1"></textarea>
+        <button id="advisorSend" onclick="sendAdvisorMsg()">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="logo">✦ Maison de Parfum</div>
+    <p>© 2025 Maison de Parfum. All rights reserved.</p>
+  </footer>
+
+  <script src="shop.js"></script>
+  <script>
+    window.PERFUME_API_URL = '/api/chat';
+    let history = [];
+    let isLoading = false;
+
+    const msgs = document.getElementById('chatMessages');
+    const input = document.getElementById('advisorInput');
+    const sendBtn = document.getElementById('advisorSend');
+    const chips = document.getElementById('chatChips');
+
+    function addMsg(role, text) {
+      const div = document.createElement('div');
+      div.className = `chat-msg ${role}`;
+      div.innerHTML = `<div class="chat-bubble ${role}">${text.replace(/\n/g,'<br>')}</div>`;
+      msgs.appendChild(div);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    function showTyping() {
+      const div = document.createElement('div');
+      div.className = 'chat-msg ai'; div.id = 'typingRow';
+      div.innerHTML = `<div class="chat-bubble ai"><div class="pf-typing"><span></span><span></span><span></span></div></div>`;
+      msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    function removeTyping() { document.getElementById('typingRow')?.remove(); }
+
+    async function callAI(text) {
+      if (isLoading) return;
+      isLoading = true; sendBtn.disabled = true;
+      history.push({ role: 'user', content: text });
+      showTyping();
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: history })
+        });
+        const data = await res.json();
+        const reply = data.reply || 'Sorry, something went wrong.';
+        history.push({ role: 'assistant', content: reply });
+        removeTyping(); addMsg('ai', reply);
+      } catch { removeTyping(); addMsg('ai', 'Connection error — please try again.'); }
+      isLoading = false; sendBtn.disabled = false;
+    }
+
+    function sendAdvisorMsg() {
+      const text = input.value.trim();
+      if (!text || isLoading) return;
+      chips.style.display = 'none';
+      addMsg('user', text); input.value = ''; input.style.height = '';
+      callAI(text);
+    }
+
+    window.chipSend = function(el) {
+      if (isLoading) return;
+      chips.style.display = 'none';
+      addMsg('user', el.textContent); callAI(el.textContent);
+    };
+
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendAdvisorMsg(); }
+    });
+    input.addEventListener('input', function() {
+      this.style.height = ''; this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+    });
+
+    // Auto-start conversation
+    callAI('Hello, I need help finding a perfume.');
+    updateCartCount();
+  </script>
+</body>
+</html>

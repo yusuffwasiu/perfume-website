@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product — Maison de Parfum</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="logo">✦ Maison de Parfum</a>
+    <div class="nav-links">
+      <a href="shop.html">Shop</a>
+      <a href="advisor.html">AI Advisor</a>
+    </div>
+    <div class="nav-actions">
+      <a href="cart.html" class="cart-icon">🛍 <span class="cart-count" id="cartCount">0</span></a>
+    </div>
+  </nav>
+
+  <div class="product-detail" id="productDetail"></div>
+
+  <section class="section">
+    <div class="section-header"><h2>You May Also Like</h2></div>
+    <div class="products-grid" id="relatedProducts"></div>
+  </section>
+
+  <footer class="footer">
+    <div class="logo">✦ Maison de Parfum</div>
+    <p>© 2025 Maison de Parfum. All rights reserved.</p>
+  </footer>
+
+  <script src="shop.js"></script>
+  <script>
+    window.PERFUME_API_URL = '/api/chat';
+    const params = new URLSearchParams(location.search);
+    const id = parseInt(params.get('id'));
+    const product = PRODUCTS.find(p => p.id === id);
+
+    if (!product) {
+      location.href = 'shop.html';
+    } else {
+      document.title = product.name + ' — Maison de Parfum';
+      document.getElementById('productDetail').innerHTML = `
+        <div class="pd-image">${product.emoji}</div>
+        <div class="pd-info">
+          <p class="product-family">${product.family}</p>
+          <h1 class="pd-title">${product.name}</h1>
+          <p class="pd-tagline">${product.tagline}</p>
+          <p class="pd-desc">${product.description}</p>
+          <div class="pd-notes">
+            <p class="notes-label">Fragrance Notes</p>
+            <p class="notes-text">${product.notes}</p>
+          </div>
+          <div class="pd-buy">
+            <span class="pd-price">$${product.price}</span>
+            <div class="qty-row">
+              <button onclick="changeQty(-1)">−</button>
+              <span id="qty">1</span>
+              <button onclick="changeQty(1)">+</button>
+            </div>
+            <button class="btn-primary full-width" onclick="buyNow()">Add to Cart</button>
+            <a href="advisor.html" class="btn-outline full-width" style="text-align:center; display:block; margin-top:10px">Not sure? Ask our AI →</a>
+          </div>
+        </div>
+      `;
+
+      let qty = 1;
+      window.changeQty = (n) => {
+        qty = Math.max(1, qty + n);
+        document.getElementById('qty').textContent = qty;
+      };
+      window.buyNow = () => {
+        addToCart(product.id, qty);
+      };
+
+      // Related products
+      const related = PRODUCTS.filter(p => p.id !== id).slice(0, 3);
+      document.getElementById('relatedProducts').innerHTML = related.map(p => `
+        <div class="product-card" onclick="location.href='product.html?id=${p.id}'">
+          <div class="product-img">${p.emoji}</div>
+          <div class="product-info">
+            <p class="product-family">${p.family}</p>
+            <h3 class="product-name">${p.name}</h3>
+            <p class="product-desc">${p.tagline}</p>
+            <div class="product-footer">
+              <span class="product-price">$${p.price}</span>
+              <button class="btn-add" onclick="event.stopPropagation(); addToCart(${p.id})">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+    updateCartCount();
+  </script>
+  <script src="widget.js"></script>
+</body>
+</html>

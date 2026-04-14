@@ -3,61 +3,41 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Maison de Parfum — Luxury Fragrances</title>
+  <title>Shop — Maison de Parfum</title>
   <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
-  <!-- NAVIGATION -->
   <nav class="navbar">
     <a href="index.html" class="logo">✦ Maison de Parfum</a>
     <div class="nav-links">
-      <a href="shop.html">Shop</a>
+      <a href="shop.html" class="active">Shop</a>
       <a href="advisor.html">AI Advisor</a>
       <a href="#">About</a>
     </div>
     <div class="nav-actions">
       <a href="advisor.html" class="nav-advisor">✦ Find My Scent</a>
-      <a href="cart.html" class="cart-icon">
-        🛍 <span class="cart-count" id="cartCount">0</span>
-      </a>
+      <a href="cart.html" class="cart-icon">🛍 <span class="cart-count" id="cartCount">0</span></a>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content">
-      <p class="hero-label">New Collection 2025</p>
-      <h1>The Art of<br/><em>Invisible Luxury</em></h1>
-      <p class="hero-sub">Each fragrance tells a story. Let our AI advisor find yours.</p>
-      <div class="hero-btns">
-        <a href="shop.html" class="btn-primary">Explore Collection</a>
-        <a href="advisor.html" class="btn-outline">AI Advisor →</a>
-      </div>
-    </div>
-  </section>
+  <div class="page-header">
+    <h1>The Collection</h1>
+    <p>Six masterfully crafted fragrances for every mood and moment</p>
+  </div>
 
-  <!-- FEATURED PRODUCTS -->
-  <section class="section">
-    <div class="section-header">
-      <h2>Bestsellers</h2>
-      <a href="shop.html" class="see-all">View all →</a>
-    </div>
-    <div class="products-grid" id="featuredProducts"></div>
-  </section>
+  <!-- FILTERS -->
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterProducts('all', this)">All</button>
+    <button class="filter-btn" onclick="filterProducts('Floral', this)">Floral</button>
+    <button class="filter-btn" onclick="filterProducts('Fresh', this)">Fresh</button>
+    <button class="filter-btn" onclick="filterProducts('Woody', this)">Woody</button>
+    <button class="filter-btn" onclick="filterProducts('Oriental', this)">Oriental</button>
+  </div>
 
-  <!-- AI ADVISOR BANNER -->
-  <section class="advisor-banner">
-    <div class="advisor-banner-inner">
-      <p class="hero-label">Powered by AI</p>
-      <h2>Not sure which scent is right for you?</h2>
-      <p>Answer 3 simple questions and our AI advisor will recommend your perfect fragrance in seconds.</p>
-      <a href="advisor.html" class="btn-primary">Start Your Scent Journey</a>
-    </div>
-  </section>
+  <div class="products-grid wide" id="shopGrid"></div>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="logo">✦ Maison de Parfum</div>
     <p>© 2025 Maison de Parfum. All rights reserved.</p>
@@ -66,10 +46,9 @@
   <script src="shop.js"></script>
   <script>
     window.PERFUME_API_URL = '/api/chat';
-    // Render featured products
-    const grid = document.getElementById('featuredProducts');
-    PRODUCTS.slice(0, 4).forEach(p => {
-      grid.innerHTML += `
+    function renderProducts(list) {
+      const grid = document.getElementById('shopGrid');
+      grid.innerHTML = list.map(p => `
         <div class="product-card" onclick="location.href='product.html?id=${p.id}'">
           <div class="product-img">${p.emoji}</div>
           <div class="product-info">
@@ -82,8 +61,17 @@
             </div>
           </div>
         </div>
-      `;
-    });
+      `).join('');
+    }
+
+    function filterProducts(keyword, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filtered = keyword === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.family.includes(keyword));
+      renderProducts(filtered);
+    }
+
+    renderProducts(PRODUCTS);
     updateCartCount();
   </script>
   <script src="widget.js"></script>
