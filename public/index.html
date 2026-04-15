@@ -9,7 +9,6 @@
 </head>
 <body>
 
-  <!-- NAVIGATION -->
   <nav class="navbar">
     <a href="index.html" class="logo">✦ Maison de Parfum</a>
     <div class="nav-links">
@@ -19,13 +18,10 @@
     </div>
     <div class="nav-actions">
       <a href="advisor.html" class="nav-advisor">✦ Find My Scent</a>
-      <a href="cart.html" class="cart-icon">
-        🛍 <span class="cart-count" id="cartCount">0</span>
-      </a>
+      <a href="cart.html" class="cart-icon">🛍 <span id="cartCount">0</span></a>
     </div>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
       <p class="hero-label">New Collection 2025</p>
@@ -38,7 +34,6 @@
     </div>
   </section>
 
-  <!-- FEATURED PRODUCTS -->
   <section class="section">
     <div class="section-header">
       <h2>Bestsellers</h2>
@@ -47,17 +42,15 @@
     <div class="products-grid" id="featuredProducts"></div>
   </section>
 
-  <!-- AI ADVISOR BANNER -->
   <section class="advisor-banner">
     <div class="advisor-banner-inner">
       <p class="hero-label">Powered by AI</p>
       <h2>Not sure which scent is right for you?</h2>
-      <p>Answer 3 simple questions and our AI advisor will recommend your perfect fragrance in seconds.</p>
-      <a href="advisor.html" class="btn-primary">Start Your Scent Journey</a>
+      <p>Answer a few questions and our AI advisor recommends your perfect fragrance instantly.</p>
+      <a href="advisor.html" class="btn-primary" style="background:#C9A84C;color:#1C1A17">Start Your Scent Journey</a>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="logo">✦ Maison de Parfum</div>
     <p>© 2025 Maison de Parfum. All rights reserved.</p>
@@ -66,9 +59,8 @@
   <script src="shop.js"></script>
   <script>
     window.PERFUME_API_URL = '/api/chat';
-    // Render featured products
     const grid = document.getElementById('featuredProducts');
-    PRODUCTS.slice(0, 4).forEach(p => {
+    PRODUCTS.slice(0,4).forEach(p => {
       grid.innerHTML += `
         <div class="product-card" onclick="location.href='product.html?id=${p.id}'">
           <div class="product-img">${p.emoji}</div>
@@ -78,11 +70,10 @@
             <p class="product-desc">${p.tagline}</p>
             <div class="product-footer">
               <span class="product-price">$${p.price}</span>
-              <button class="btn-add" onclick="event.stopPropagation(); addToCart(${p.id})">Add to Cart</button>
+              <button class="btn-add" onclick="event.stopPropagation();addToCart(${p.id})">Add to Cart</button>
             </div>
           </div>
-        </div>
-      `;
+        </div>`;
     });
     updateCartCount();
   </script>
