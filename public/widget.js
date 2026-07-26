@@ -131,7 +131,7 @@
     div.className = `pf-msg ${role}`;
     div.innerHTML = `
       <div class="pf-avatar ${role}">${role === 'ai' ? '✦' : 'Y'}</div>
-      <div class="pf-bubble ${role}">${text.replace(/\n/g, '<br>')}</div>
+      <div class="pf-bubble ${role}">${role === 'ai' ? formatAIText(text) : text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
     `;
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;

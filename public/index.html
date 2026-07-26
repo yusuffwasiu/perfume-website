@@ -32,6 +32,7 @@
         <a href="advisor.html" class="btn-outline">AI Advisor →</a>
       </div>
     </div>
+    <div class="hero-art" id="heroArt" aria-hidden="true"></div>
   </section>
 
   <section class="section">
@@ -59,11 +60,17 @@
   <script src="shop.js"></script>
   <script>
     window.PERFUME_API_URL = '/api/chat';
+    const heroArt = document.getElementById('heroArt');
+    const heroPicks = [PRODUCTS[4], PRODUCTS[0], PRODUCTS[5]];
+    heroArt.innerHTML = `
+      <div class="hero-glow"></div>
+      ${heroPicks.map((p, i) => `<div class="hero-bottle hb-${i}">${bottleSVG(p, i === 1 ? 150 : 110)}</div>`).join('')}
+    `;
     const grid = document.getElementById('featuredProducts');
     PRODUCTS.slice(0,4).forEach(p => {
       grid.innerHTML += `
         <div class="product-card" onclick="location.href='product.html?id=${p.id}'">
-          <div class="product-img">${p.emoji}</div>
+          <div class="product-img">${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}${bottleSVG(p)}</div>
           <div class="product-info">
             <p class="product-family">${p.family}</p>
             <h3 class="product-name">${p.name}</h3>

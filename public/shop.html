@@ -50,7 +50,7 @@
       const grid = document.getElementById('shopGrid');
       grid.innerHTML = list.map(p => `
         <div class="product-card" onclick="location.href='product.html?id=${p.id}'">
-          <div class="product-img">${p.emoji}</div>
+          <div class="product-img">${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}${bottleSVG(p)}</div>
           <div class="product-info">
             <p class="product-family">${p.family}</p>
             <h3 class="product-name">${p.name}</h3>
