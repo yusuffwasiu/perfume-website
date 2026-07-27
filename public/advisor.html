@@ -30,11 +30,26 @@
     <div class="advisor-chat" id="advisorChat">
       <div class="chat-messages" id="chatMessages"></div>
       <div class="chat-chips" id="chatChips">
-        <div class="pf-chip" onclick="chipSend(this)">Fresh & citrusy</div>
-        <div class="pf-chip" onclick="chipSend(this)">Warm & sensual</div>
-        <div class="pf-chip" onclick="chipSend(this)">Woody & earthy</div>
-        <div class="pf-chip" onclick="chipSend(this)">Floral & romantic</div>
-        <div class="pf-chip" onclick="chipSend(this)">I need a gift</div>
+        <p class="step-eyebrow">01 / The Foundation</p>
+        <div class="step-options">
+          <div class="step-opt" onclick="chipSend(this,'Luxurious &amp; warm — midnight in a velvet-lined library.')">
+            <span class="so-label">Luxurious &amp; Warm</span>
+            <span class="so-desc">Midnight in a velvet-lined library.</span>
+          </div>
+          <div class="step-opt" onclick="chipSend(this,'Crisp &amp; ethereal — sunrise over a dewy coast.')">
+            <span class="so-label">Crisp &amp; Ethereal</span>
+            <span class="so-desc">Sunrise over a dewy coast.</span>
+          </div>
+          <div class="step-opt" onclick="chipSend(this,'Mystical &amp; smoky — a rain-drenched ancient temple.')">
+            <span class="so-label">Mystical &amp; Smoky</span>
+            <span class="so-desc">A rain-drenched ancient temple.</span>
+          </div>
+          <div class="step-opt" onclick="chipSend(this,'Vibrant &amp; floral — a blooming garden at twilight.')">
+            <span class="so-label">Vibrant &amp; Floral</span>
+            <span class="so-desc">A blooming garden at twilight.</span>
+          </div>
+        </div>
+        <span class="step-gift-link" onclick="chipSend(this,'I need a gift for someone special.')">I need a gift →</span>
       </div>
       <div class="chat-input-row">
         <textarea id="advisorInput" placeholder="Describe your ideal scent…" rows="1"></textarea>
@@ -102,10 +117,11 @@
       callAI(text);
     }
 
-    window.chipSend = function(el) {
+    window.chipSend = function(el, text) {
       if (isLoading) return;
+      const msg = text || el.textContent.trim();
       chips.style.display = 'none';
-      addMsg('user', el.textContent); callAI(el.textContent);
+      addMsg('user', msg); callAI(msg);
     };
 
     input.addEventListener('keydown', e => {

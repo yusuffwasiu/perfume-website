@@ -67,6 +67,23 @@ const PRODUCTS = [
   }
 ];
 
+// ── Top / Heart / Base mini note trio for product cards ────
+function notesTrio(p) {
+  const parts = { top: '', heart: '', base: '' };
+  p.notes.split('—').forEach(seg => {
+    seg = seg.trim();
+    if (/^top:/i.test(seg)) parts.top = seg.replace(/^top:\s*/i, '');
+    else if (/^heart:/i.test(seg)) parts.heart = seg.replace(/^heart:\s*/i, '');
+    else if (/^base:/i.test(seg)) parts.base = seg.replace(/^base:\s*/i, '');
+  });
+  return `
+    <div class="notes-trio">
+      <div><div class="nt-label">Top</div><div class="nt-value">${parts.top}</div></div>
+      <div><div class="nt-label">Heart</div><div class="nt-value">${parts.heart}</div></div>
+      <div><div class="nt-label">Base</div><div class="nt-value">${parts.base}</div></div>
+    </div>`;
+}
+
 // ── Bottle illustration (replaces emoji placeholders) ──────
 // Renders a small, elegant flacon silhouette tinted to the fragrance's
 // family colour, with a consistent gold cap so every product reads as

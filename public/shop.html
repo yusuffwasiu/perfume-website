@@ -22,18 +22,28 @@
     </div>
   </nav>
 
-  <div class="page-header">
+  <div class="page-header left">
     <h1>The Collection</h1>
-    <p>Six masterfully crafted fragrances for every mood and moment</p>
+    <p>Six masterfully crafted fragrances for every mood and moment.</p>
   </div>
 
-  <!-- FILTERS -->
-  <div class="filters">
-    <button class="filter-btn active" onclick="filterProducts('all', this)">All</button>
-    <button class="filter-btn" onclick="filterProducts('Floral', this)">Floral</button>
-    <button class="filter-btn" onclick="filterProducts('Fresh', this)">Fresh</button>
-    <button class="filter-btn" onclick="filterProducts('Woody', this)">Woody</button>
-    <button class="filter-btn" onclick="filterProducts('Oriental', this)">Oriental</button>
+  <div class="filters-bar">
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterProducts('all', this)">All Scents</button>
+      <button class="filter-btn" onclick="filterProducts('Floral', this)">Floral</button>
+      <button class="filter-btn" onclick="filterProducts('Fresh', this)">Fresh</button>
+      <button class="filter-btn" onclick="filterProducts('Woody', this)">Woody</button>
+      <button class="filter-btn" onclick="filterProducts('Oriental', this)">Oriental</button>
+    </div>
+    <div class="sort-row">
+      <span>Sort by:</span>
+      <select class="sort-select" id="sortSelect" onchange="applySort()">
+        <option value="default">Newest Arrivals</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="name">Name: A–Z</option>
+      </select>
+    </div>
   </div>
 
   <div class="products-grid wide" id="shopGrid"></div>
@@ -46,6 +56,8 @@
   <script src="shop.js"></script>
   <script>
     window.PERFUME_API_URL = '/api/chat';
+    let currentFamily = 'all';
+
     function renderProducts(list) {
       const grid = document.getElementById('shopGrid');
       grid.innerHTML = list.map(p => `
@@ -55,6 +67,7 @@
             <p class="product-family">${p.family}</p>
             <h3 class="product-name">${p.name}</h3>
             <p class="product-desc">${p.tagline}</p>
+            ${notesTrio(p)}
             <div class="product-footer">
               <span class="product-price">$${p.price}</span>
               <button class="btn-add" onclick="event.stopPropagation(); addToCart(${p.id})">Add to Cart</button>
@@ -64,11 +77,24 @@
       `).join('');
     }
 
+    function getFiltered() {
+      return currentFamily === 'all' ? [...PRODUCTS] : PRODUCTS.filter(p => p.family.includes(currentFamily));
+    }
+
+    function applySort() {
+      const sort = document.getElementById('sortSelect').value;
+      let list = getFiltered();
+      if (sort === 'price-asc') list.sort((a,b) => a.price - b.price);
+      else if (sort === 'price-desc') list.sort((a,b) => b.price - a.price);
+      else if (sort === 'name') list.sort((a,b) => a.name.localeCompare(b.name));
+      renderProducts(list);
+    }
+
     function filterProducts(keyword, btn) {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const filtered = keyword === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.family.includes(keyword));
-      renderProducts(filtered);
+      currentFamily = keyword;
+      applySort();
     }
 
     renderProducts(PRODUCTS);

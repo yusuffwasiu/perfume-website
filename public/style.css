@@ -47,12 +47,43 @@ a{text-decoration:none;color:inherit}
 @media(prefers-reduced-motion:reduce){.hero-glow,.hero-bottle{animation:none}}
 
 .section{padding:72px 48px}
-.section-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:36px}
+.section-header{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:36px;flex-wrap:wrap}
 .section-header h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300}
+.section-sub{color:#7A7060;font-size:14px;margin-top:6px;max-width:420px}
 .see-all{font-size:13px;color:#C9A84C;letter-spacing:.04em}
+
+/* ── Story section ─────────────────────────────────────── */
+.story{background:#1C1A17;color:#F5EFE4;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0}
+.story-copy{padding:80px 64px}
+.story-copy .hero-label{color:#C9A84C}
+.story-copy h2{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:40px;line-height:1.25;margin:16px 0 24px;color:#F5EFE4}
+.story-copy p{color:rgba(245,238,228,.65);font-size:14.5px;line-height:1.85;max-width:440px;margin-bottom:32px}
+.story-stats{display:flex;gap:40px}
+.story-stats div{border-top:1px solid rgba(201,168,76,.35);padding-top:10px}
+.story-stats .st-num{font-family:'Cormorant Garamond',serif;font-size:26px;color:#C9A84C}
+.story-stats .st-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,238,228,.55);margin-top:2px}
+.story-art{position:relative;min-height:460px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 45%,#2A2620 0%,#1C1A17 72%)}
+.story-art svg{width:70%;max-width:280px}
+
+/* ── Signature teasers ─────────────────────────────────── */
+.teasers{display:grid;grid-template-columns:1.3fr 1fr;gap:20px}
+.teaser-card{border-radius:16px;padding:36px;min-height:220px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;transition:transform .3s}
+.teaser-card:hover{transform:translateY(-3px)}
+.teaser-card.light{background:linear-gradient(135deg,#F0E6D2 0%,#E8DABB 100%)}
+.teaser-card.dark{background:#1C1A17;color:#F5EFE4}
+.teaser-card .hero-label{margin-bottom:10px}
+.teaser-card h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;margin-bottom:8px}
+.teaser-card p{font-size:13.5px;line-height:1.6;opacity:.75;max-width:300px}
+.teaser-card .tc-arrow{position:absolute;top:32px;right:32px;font-size:18px;color:#C9A84C}
+
+/* ── Testimonial strip ─────────────────────────────────── */
+.testimonial{text-align:center;padding:72px 24px;max-width:720px;margin:0 auto}
+.testimonial blockquote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:26px;font-weight:300;line-height:1.5;color:#3A362F;margin-bottom:20px}
+.testimonial cite{font-size:12px;letter-spacing:.05em;color:#7A7060;font-style:normal}
 .page-header{text-align:center;padding:64px 24px 40px}
 .page-header h1{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;margin-bottom:12px}
 .page-header p{color:#7A7060;font-size:15px}
+.page-header.left{text-align:left;padding:56px 48px 0;max-width:560px}
 
 .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px}
 .products-grid.wide{padding:0 48px 72px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
@@ -69,9 +100,17 @@ a{text-decoration:none;color:inherit}
 .product-footer{display:flex;justify-content:space-between;align-items:center}
 .product-price{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500}
 
-.filters{display:flex;gap:8px;padding:0 48px 32px;flex-wrap:wrap}
-.filter-btn{background:#fff;border:.5px solid rgba(180,155,100,.25);border-radius:20px;padding:7px 18px;font-family:'Jost',sans-serif;font-size:13px;cursor:pointer;color:#7A7060;transition:all .2s}
-.filter-btn.active,.filter-btn:hover{background:#1C1A17;color:#F5EED8;border-color:#1C1A17}
+.notes-trio{display:flex;gap:12px;margin:0 0 16px}
+.notes-trio div{flex:1;min-width:0}
+.notes-trio .nt-label{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#B0A898;margin-bottom:3px}
+.notes-trio .nt-value{font-size:11px;color:#4A4540;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.filters-bar{display:flex;justify-content:space-between;align-items:center;padding:32px 48px 32px;flex-wrap:wrap;gap:16px;border-bottom:.5px solid rgba(180,155,100,.2);margin-bottom:36px}
+.filters{display:flex;gap:28px;flex-wrap:wrap}
+.filter-btn{background:none;border:none;border-bottom:1.5px solid transparent;padding:2px 0 8px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.03em;cursor:pointer;color:#7A7060;transition:all .2s}
+.filter-btn.active,.filter-btn:hover{color:#1C1A17;border-bottom-color:#C9A84C}
+.sort-row{display:flex;align-items:center;gap:8px;font-size:12px;color:#7A7060;letter-spacing:.03em}
+.sort-select{font-family:'Jost',sans-serif;font-size:12px;color:#1C1A17;background:transparent;border:none;cursor:pointer;padding:4px 2px}
 
 .product-detail{display:grid;grid-template-columns:1fr 1fr;gap:64px;padding:64px 72px;max-width:1200px;margin:0 auto}
 .pd-image{position:relative;background:radial-gradient(ellipse at 50% 38%,#F5EFE4 0%,#EBE0C9 100%);border-radius:20px;display:flex;align-items:center;justify-content:center;min-height:500px}
@@ -96,21 +135,28 @@ a{text-decoration:none;color:inherit}
 .advisor-banner h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;margin-bottom:16px}
 .advisor-banner p{color:rgba(245,238,216,.65);margin-bottom:32px;line-height:1.7}
 
-.advisor-page{max-width:780px;margin:0 auto;padding:64px 24px}
+.advisor-page{max-width:860px;margin:0 auto;padding:64px 24px}
 .advisor-intro{text-align:center;margin-bottom:48px}
 .advisor-intro h1{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;line-height:1.15;margin-bottom:16px}
 .advisor-intro h1 em{font-style:italic;color:#C9A84C}
 .advisor-intro p{color:#7A7060;font-size:15px;line-height:1.7}
-.advisor-chat{background:#fff;border:.5px solid rgba(180,155,100,.2);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;height:560px}
-.chat-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px}
+.advisor-chat{background:#fff;border:.5px solid rgba(180,155,100,.2);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;min-height:480px}
+.chat-messages{flex:1;overflow-y:auto;max-height:52vh;padding:20px;display:flex;flex-direction:column;gap:14px}
 .chat-msg{display:flex;gap:10px;align-items:flex-end}
 .chat-msg.user{flex-direction:row-reverse}
 .chat-bubble{max-width:80%;padding:12px 16px;font-size:14px;line-height:1.65;color:#1C1A17;border:.5px solid rgba(180,155,100,.2)}
 .chat-bubble.ai{background:#FAF8F4;border-radius:12px 12px 12px 3px}
 .chat-bubble.user{background:#F0EBE1;border-radius:12px 12px 3px 12px}
-.chat-chips{padding:0 16px 12px;display:flex;flex-wrap:wrap;gap:7px}
-.pf-chip{font-size:12px;color:#7A7060;background:#fff;border:.5px solid rgba(180,155,100,.3);border-radius:20px;padding:6px 13px;cursor:pointer;transition:all .18s;font-family:'Jost',sans-serif}
-.pf-chip:hover{border-color:rgba(201,168,76,.6);color:#8B6914}
+.chat-chips{padding:4px 20px 20px}
+.step-eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#C9A84C;margin-bottom:14px}
+.step-options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.step-opt{border:.5px solid rgba(180,155,100,.25);border-radius:12px;padding:18px 20px;cursor:pointer;transition:all .2s}
+.step-opt:hover{border-color:#C9A84C;background:#FAF8F4}
+.so-label{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#B0A898;margin-bottom:8px}
+.step-opt:hover .so-label{color:#C9A84C}
+.so-desc{display:block;font-family:'Cormorant Garamond',serif;font-size:17px;line-height:1.35}
+.step-gift-link{display:inline-block;margin-top:16px;font-size:12.5px;color:#7A7060;cursor:pointer;border-bottom:.5px solid rgba(122,112,96,.35)}
+.step-gift-link:hover{color:#1C1A17;border-color:#1C1A17}
 .chat-input-row{padding:12px;border-top:.5px solid rgba(180,155,100,.15);display:flex;gap:8px;background:#fff}
 #advisorInput{flex:1;border:.5px solid rgba(180,155,100,.3);border-radius:8px;padding:10px 14px;font-family:'Jost',sans-serif;font-size:13px;outline:none;resize:none;background:#FAF8F4;color:#1C1A17}
 #advisorInput:focus{border-color:rgba(201,168,76,.5)}
@@ -144,6 +190,12 @@ a{text-decoration:none;color:inherit}
 .checkout-page{display:grid;grid-template-columns:1fr 380px;gap:64px;max-width:1100px;margin:0 auto;padding:64px 48px}
 .checkout-form-side h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;margin-bottom:36px}
 .checkout-section{margin-bottom:32px}
+.form-group{margin-bottom:20px}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.field-label{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#B0A898;margin-bottom:6px}
+.field-input{width:100%;border:none;border-bottom:1px solid rgba(180,155,100,.35);background:transparent;padding:8px 0;font-family:'Jost',sans-serif;font-size:14.5px;color:#1C1A17;outline:none;transition:border-color .2s}
+.field-input:focus{border-bottom-color:#C9A84C}
+.field-input::placeholder{color:#B0A898}
 .checkout-section h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:16px;padding-bottom:10px;border-bottom:.5px solid rgba(180,155,100,.2)}
 .form-input{width:100%;border:.5px solid rgba(180,155,100,.3);border-radius:8px;padding:12px 16px;font-family:'Jost',sans-serif;font-size:14px;color:#1C1A17;background:#FAF8F4;outline:none;margin-bottom:10px}
 .form-input:focus{border-color:rgba(201,168,76,.5)}
@@ -154,7 +206,15 @@ a{text-decoration:none;color:inherit}
 .card-element-box{border:.5px solid rgba(180,155,100,.3);border-radius:8px;padding:14px 16px;background:#FAF8F4;margin-bottom:10px;min-height:50px}
 .checkout-summary-side{background:#fff;border:.5px solid rgba(180,155,100,.2);border-radius:16px;padding:28px;height:fit-content}
 .checkout-summary-side h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;margin-bottom:20px}
-.order-item{display:flex;justify-content:space-between;font-size:13px;color:#4A4540;padding:8px 0;border-bottom:.5px solid rgba(180,155,100,.1)}
+.order-item{display:flex;align-items:center;gap:12px;font-size:13px;color:#4A4540;padding:12px 0;border-bottom:.5px solid rgba(180,155,100,.1)}
+.order-item .oi-thumb{width:44px;height:52px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 40%,#F5EFE4 0%,#EFE6D4 100%);border-radius:8px;overflow:hidden}
+.order-item .oi-thumb .bottle-svg{transform:translateY(3px)}
+.order-item .oi-info{flex:1;min-width:0}
+.order-item .oi-name{font-family:'Cormorant Garamond',serif;font-size:15px;color:#1C1A17}
+.order-item .oi-qty{font-size:11px;color:#B0A898;margin-top:2px}
+.order-item .oi-price{font-size:13px;color:#1C1A17;white-space:nowrap}
+.btn-gold{background:#C9A84C;color:#1C1A17}
+.btn-gold:hover{background:#1C1A17;color:#F5EED8}
 
 .pf-typing{display:flex;gap:4px;align-items:center;padding:4px 0}
 .pf-typing span{width:5px;height:5px;background:#C9A84C;border-radius:50%;animation:pfBounce 1.2s infinite ease-in-out}
@@ -219,4 +279,13 @@ a{text-decoration:none;color:inherit}
   .cart-layout{grid-template-columns:1fr}
   .checkout-page{grid-template-columns:1fr;padding:40px 20px}
   .filters{padding:0 20px 24px}
+  .filters-bar{padding:24px 20px}
+  .page-header.left{padding:40px 20px 0;max-width:100%}
+  .story{grid-template-columns:1fr}
+  .story-copy{padding:56px 24px}
+  .story-copy h2{font-size:30px}
+  .story-art{min-height:260px}
+  .teasers{grid-template-columns:1fr}
+  .testimonial blockquote{font-size:21px}
+  .step-options{grid-template-columns:1fr}
 }

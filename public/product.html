@@ -85,6 +85,7 @@
             <p class="product-family">${p.family}</p>
             <h3 class="product-name">${p.name}</h3>
             <p class="product-desc">${p.tagline}</p>
+            ${notesTrio(p)}
             <div class="product-footer">
               <span class="product-price">$${p.price}</span>
               <button class="btn-add" onclick="event.stopPropagation(); addToCart(${p.id})">Add to Cart</button>

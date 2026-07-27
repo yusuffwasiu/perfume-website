@@ -37,10 +37,67 @@
 
   <section class="section">
     <div class="section-header">
-      <h2>Bestsellers</h2>
+      <div>
+        <p class="hero-label" style="margin-bottom:8px">The Edit</p>
+        <h2>Bestsellers</h2>
+        <p class="section-sub">Our most sought-after compositions, crafted for those who speak without words.</p>
+      </div>
       <a href="shop.html" class="see-all">View all →</a>
     </div>
     <div class="products-grid" id="featuredProducts"></div>
+  </section>
+
+  <section class="story">
+    <div class="story-copy">
+      <p class="hero-label">The Alchemy</p>
+      <h2>The art of scent is the art of memory.</h2>
+      <p>Each bottle begins as a narrative. Our perfumers source rare botanicals and blend them with precision, composing an olfactory signature that lingers in memory long after it's left the skin — the truest form of art: one felt, never seen.</p>
+      <div class="story-stats">
+        <div><div class="st-num">6</div><div class="st-label">Original Blends</div></div>
+        <div><div class="st-num">40+</div><div class="st-label">Rare Materials</div></div>
+        <div><div class="st-num">100%</div><div class="st-label">Hand Composed</div></div>
+      </div>
+    </div>
+    <div class="story-art">
+      <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="100" cy="205" rx="70" ry="6" fill="#C9A84C" opacity=".12"/>
+        <path d="M85 20 H115 V55 L140 130 Q150 160 120 170 H80 Q50 160 60 130 L85 55 Z" fill="none" stroke="#C9A84C" stroke-width="1.2" opacity=".85"/>
+        <line x1="80" y1="20" x2="120" y2="20" stroke="#C9A84C" stroke-width="1.2"/>
+        <circle cx="100" cy="115" r="3" fill="#C9A84C"/>
+        <circle cx="88" cy="135" r="2" fill="#C9A84C" opacity=".7"/>
+        <circle cx="112" cy="140" r="2.2" fill="#C9A84C" opacity=".7"/>
+        <path d="M78 60 Q100 75 122 60" stroke="#C9A84C" stroke-width="1" opacity=".5" fill="none"/>
+        <path d="M70 95 Q100 112 130 95" stroke="#C9A84C" stroke-width="1" opacity=".4" fill="none"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <p class="hero-label" style="margin-bottom:8px">Discover Your Signature</p>
+        <h2>Let our advisor guide the way</h2>
+      </div>
+    </div>
+    <div class="teasers">
+      <a href="advisor.html" class="teaser-card light">
+        <span class="tc-arrow">↗</span>
+        <p class="hero-label" style="color:#8B6914">Emotional Mapping</p>
+        <h3>How do you want to feel?</h3>
+        <p>Select a mood and let our AI advisor find the notes that match it.</p>
+      </a>
+      <a href="advisor.html" class="teaser-card dark">
+        <span class="tc-arrow">↗</span>
+        <p class="hero-label">Gifting</p>
+        <h3>Find a gift</h3>
+        <p>Tell us about them — we'll suggest something they'll remember.</p>
+      </a>
+    </div>
+  </section>
+
+  <section class="testimonial">
+    <blockquote>"The advisor recommended Velvet Ember and it's genuinely the closest a fragrance has come to feeling made for me."</blockquote>
+    <cite>— A. MORENO, RETURNING CUSTOMER</cite>
   </section>
 
   <section class="advisor-banner">
@@ -75,6 +132,7 @@
             <p class="product-family">${p.family}</p>
             <h3 class="product-name">${p.name}</h3>
             <p class="product-desc">${p.tagline}</p>
+            ${notesTrio(p)}
             <div class="product-footer">
               <span class="product-price">$${p.price}</span>
               <button class="btn-add" onclick="event.stopPropagation();addToCart(${p.id})">Add to Cart</button>
