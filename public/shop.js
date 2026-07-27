@@ -8,6 +8,7 @@ const PRODUCTS = [
     price: 120,
     tint: "#A8425A",
     badge: "Bestseller",
+    image: "images/bloom-noir.jpg",
     description: "Bloom Noir is a seductive floral oriental that opens with the brightness of rose and bergamot, deepening into rich oud and jasmine before settling into a warm, skin-like musk."
   },
   {
@@ -19,6 +20,7 @@ const PRODUCTS = [
     price: 95,
     tint: "#4C7C8C",
     badge: "",
+    image: "images/sea-drift.jpg",
     description: "Sea Drift captures the feeling of standing at the ocean's edge — a burst of citrus and sea salt that dries down into smooth cedarwood and vetiver."
   },
   {
@@ -30,6 +32,7 @@ const PRODUCTS = [
     price: 140,
     tint: "#A8642E",
     badge: "Bestseller",
+    image: "images/velvet-ember.jpg",
     description: "Velvet Ember is a deeply comforting fragrance. Warm spices open the scent before melting into creamy sandalwood and vanilla, finished with a rich amber and tonka base."
   },
   {
@@ -41,6 +44,7 @@ const PRODUCTS = [
     price: 85,
     tint: "#6E8F5C",
     badge: "",
+    image: "images/garden-reverie.jpg",
     description: "Garden Reverie is a light, airy floral that feels like wandering through a garden at dawn. Fresh green notes and peach lead into blooming peony and lily on a clean musky base."
   },
   {
@@ -52,6 +56,7 @@ const PRODUCTS = [
     price: 200,
     tint: "#3D3348",
     badge: "Limited Edition",
+    image: "images/midnight-oud.jpg",
     description: "Midnight Oud is an intense, luxurious fragrance for those who want to leave a lasting impression. Saffron and incense open dramatically before giving way to rich oud and leather."
   },
   {
@@ -63,9 +68,18 @@ const PRODUCTS = [
     price: 75,
     tint: "#C9962E",
     badge: "",
+    image: "images/citrus-matin.jpg",
     description: "Citrus Matin is the perfect morning fragrance — uplifting, clean and effortless. A burst of bergamot and lemon opens brightly before settling into a clean vetiver and musk base."
   }
 ];
+
+// ── Product visual: real photo when available, SVG bottle as fallback ──
+function productMedia(p, opts = {}) {
+  if (p.image) {
+    return `<img src="${p.image}" alt="${p.name} — ${p.tagline}" class="product-photo" loading="lazy"/>`;
+  }
+  return bottleSVG(p, opts.size);
+}
 
 // ── Top / Heart / Base mini note trio for product cards ────
 function notesTrio(p) {

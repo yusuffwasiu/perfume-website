@@ -57,7 +57,7 @@
         const p = PRODUCTS.find(x => x.id === item.id);
         return `
           <div class="cart-item">
-            <div class="ci-emoji">${bottleSVG(p, 40)}</div>
+            <div class="ci-emoji">${productMedia(p)}</div>
             <div class="ci-info">
               <p class="ci-family">${p.family}</p>
               <h4 class="ci-name">${p.name}</h4>

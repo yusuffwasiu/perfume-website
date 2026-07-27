@@ -87,7 +87,7 @@
       const p = PRODUCTS.find(x => x.id === item.id);
       itemsEl.innerHTML += `
         <div class="order-item">
-          <div class="oi-thumb">${bottleSVG(p, 32)}</div>
+          <div class="oi-thumb">${productMedia(p)}</div>
           <div class="oi-info">
             <div class="oi-name">${p.name}</div>
             <div class="oi-qty">QTY: ${item.qty}</div>

@@ -44,7 +44,7 @@
     } else {
       document.title = product.name + ' — Maison de Parfum';
       document.getElementById('productDetail').innerHTML = `
-        <div class="pd-image">${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}${bottleSVG(product, 200)}</div>
+        <div class="pd-image">${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}${productMedia(product)}</div>
         <div class="pd-info">
           <p class="product-family">${product.family}</p>
           <h1 class="pd-title">${product.name}</h1>
@@ -80,7 +80,7 @@
       const related = PRODUCTS.filter(p => p.id !== id).slice(0, 3);
       document.getElementById('relatedProducts').innerHTML = related.map(p => `
         <div class="product-card" onclick="location.href='product.html?id=${p.id}'">
-          <div class="product-img">${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}${bottleSVG(p)}</div>
+          <div class="product-img">${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}${productMedia(p)}</div>
           <div class="product-info">
             <p class="product-family">${p.family}</p>
             <h3 class="product-name">${p.name}</h3>
